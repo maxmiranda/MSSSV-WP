@@ -11,18 +11,20 @@
  	<div id="primary" class="content-area">
  		<main id="main" class="site-main">
 
- 			<?php
- 			while ( have_posts() ) : the_post();
+      <div id = "between">
+        <h1> Representative Clients </h1>
+        <ul id = "clientimgs">
 
- 				get_template_part( 'template-parts/content', 'page' );
+          <?php $time = 0?>
+            <?php while( have_rows('clients') ): the_row(); ?>
+              <?php $time +=.2 ?>
 
- 				// If comments are open or we have at least one comment, load up the comment template.
- 				if ( comments_open() || get_comments_number() ) :
- 					comments_template();
- 				endif;
-
- 			endwhile; // End of the loop.
- 			?>
+              <li> <img style = 'animation-delay: <?php echo $time ?>s'  class = 'animated fadeInDown' src = '<?php echo the_sub_field('clientimg')?>'/> </li>
+          <?php endwhile ?>
+          <div class = "clearfix"></div>
+        </ul>
+        <div class = "clearfix"></div>
+      </div>
 
  		</main><!-- #main -->
  	</div><!-- #primary -->

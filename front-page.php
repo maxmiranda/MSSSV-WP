@@ -16,21 +16,41 @@ get_header(); ?>
 
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main">
+      <div id = "between">
+        <div class = "main">
+					 <?php echo do_shortcode("[metaslider id=841]") ?>
+        </div>
 
-			<?php
-			while ( have_posts() ) : the_post();
+        <div id = "news">
 
+        <a href = "/news" > <h1> Firm News </h1></a>
+           <?php echo do_shortcode("[do_widget id=recent-posts-2]") ?>
 
-				// If comments are open or we have at least one comment, load up the comment template.
-				if ( comments_open() || get_comments_number() ) :
-					comments_template();
-				endif;
+        </div>
 
-			endwhile; // End of the loop.
-			?>
+        <div id = "contactus">
+          <a href = "/contact"> <h1> Contact Us </h1> </a>
+            <a href = '/contact'>
+              <div class = "contact_img" id = "topcontactimg" style = 'background-image: url(/wp-content/themes/msssv/img/mineola.png)'/>
+								<h2 > Long Island </h2>
+							</div>
+            </a>
+            <a href = '/contact'>
+              <div class = "contact_img" style = 'background-image: url(/wp-content/themes/msssv/img/Westchester.png)'/>
+								<h2> Westchester </h2>
+							</div>
+            </a>
+						<a href = '/contact'>
+							<div class = "contact_img" style = 'background-image: url(/wp-content/themes/msssv/img/newyork.png)'/>
+								<h2> New York </h2>
+							</div>
+						</a>
+        </div>
+        <div class="clearfix"></div>
+      </div>
 
 		</main><!-- #main -->
 	</div><!-- #primary -->
 
 <?php
-get_footer();
+get_footer(); ?>

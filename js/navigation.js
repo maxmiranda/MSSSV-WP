@@ -35,10 +35,13 @@
 			container.className = container.className.replace( ' toggled', '' );
 			button.setAttribute( 'aria-expanded', 'false' );
 			menu.setAttribute( 'aria-expanded', 'false' );
+			$("body").removeClass('toggled');
+
 		} else {
 			container.className += ' toggled';
 			button.setAttribute( 'aria-expanded', 'true' );
 			menu.setAttribute( 'aria-expanded', 'true' );
+			$("body").addClass('toggled');
 		}
 	};
 
@@ -112,90 +115,17 @@ function offsetAnchor() {
 }
 
 $(document).ready(function() {
-  $(".attorneys li").hover(
-    function() {
-      $(this).stop().animate({
-        "background-size":"110%"
-      }, "slow")
-  }, function() {
-    $(this).stop().animate({
-      "background-size":"100%"
-    }, "slow")
-  })
 
-  $("#news li").hover(
-    function() {
-        $(this).stop().animate({
-          "background-color": "#D3D3D3",
-          "font-size": "19px"
+$("#associates li").hover(
+	function() {
+		$(this).addClass('animated pulse');
+		})
 
-        }, "medium")
-    }, function() {
-        $(this).stop().animate({
-          "background-color": "#F7F7F7",
-          "font-size": "18px"
-        }, "medium")
-    })
-  $("nav a").hover(
-    function() {
-        $(this).stop().animate({
-            "background-color": "-moz-radial-gradient(top, #fff, #9DC5D8)",
-            "color":"white"
-        }, "slow")
+$("#associates li").hover(
+		function() {
+			$(this).addClass('animated pulse');
+		})
 
-    }, function() {
-        $(this).stop().animate({
-            "background-color": "-moz-radial-gradient(top, #fff, white)",
-            "color": "black"
-        }, "slow")
-    })
 
-    $("#selected").hover(
-      function() {
-          $(this).stop().animate({
-              "opacity": "1"
-          }, "slow")
 
-      }, function() {
-        $(this).stop().animate({
-          "opacity": ".43"
-        }, "slow")
-    })
-
-  $('#practicemenu li').hover(
-    function() {
-      $(this).stop().animate({
-        "background-size": "105%"
-      }, "slow")
-
-    }, function() {
-      $(this).stop().animate({
-        "background-size": "100%"
-      }, "slow")
-    })
-
-    $('#practicemenu h2').hover(
-      function() {
-        $(this).stop().animate({
-          "color": "#4CC1FC"
-        }, "medium")
-
-      }, function () {
-
-      $(this).stop().animate({
-        "color": "white"
-      }, "medium")
-
-    })
-
-    $('a[href^="#"]').click(function(event) {
-  // Click events are captured before hashchanges. Timeout
-  // causes offsetAnchor to be called after the page jump.
-  window.setTimeout(function() {
-    offsetAnchor();
-  }, 0);
-});
-  window.addEventListener("hashchange", offsetAnchor);
-
-})
-window.setTimeout(offsetAnchor, 0);
+	})

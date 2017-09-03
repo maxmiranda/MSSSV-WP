@@ -129,6 +129,196 @@ function msssv_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'msssv_scripts' );
 
+function my_excerpt_length($length) {
+return 10;
+}
+add_filter('excerpt_length', 'my_excerpt_length');
+
+
+function my_acf_save_post( $post_id ) {
+    // get new value
+    $partners = get_field('partners');
+
+		foreach($partners as $partner) {
+			$page = array(
+         'post_title' => $partner['attorney_name'],
+				 'post_content' =>
+				 "<div class = 'attorneypagetext'>".
+					"<div class = 'attorneyinfo'>".
+					$partner['email']. "\n". "tel ".
+					$partner['telephone_number']."\n". "fax ".
+					$partner['fax_number']."\n".
+					$partner['college']."\n".
+					$partner['law_school'].
+					"</div>".
+					"<div class = 'attorneybio'>".
+					$partner['attorney_bio'].
+					"</div>".
+					"</div>" ,
+         'post_status' => 'publish',
+         'post_author' => 1,
+         'post_type' => 'page',
+         'post_parent' => 18 // ID of the parent page
+				 ,'post_excerpt' => $partner['partner_photo']
+     	);
+
+		 	$page_exists = get_page_by_title( $page['post_title'] );
+
+    	if( $page_exists == null ) {
+        	// Page doesn't exist, so lets add it
+        	$insert = wp_insert_post( $page );
+        	if( $insert ) {
+            // Page was inserted ($insert = new page's ID)
+        	}
+	    } else {
+				$page_exists = array(
+					'ID' => $page_exists-> ID,
+					'post_title' => $partner['attorney_name'],
+					'post_content' =>
+					"<div class = 'attorneypagetext'>".
+					 "<div class = 'attorneyinfo'>".
+					 $partner['email']. "\n". "tel ".
+					 $partner['telephone_number']."\n". "fax ".
+					 $partner['fax_number']."\n".
+					 $partner['college']."\n".
+					 $partner['law_school'].
+					 "</div>".
+					 "<div class = 'attorneybio'>".
+					 $partner['attorney_bio'].
+					 "</div>".
+					 "</div>" ,
+					'post_status' => 'publish',
+					'post_author' => 1,
+					'post_type' => 'page',
+					'post_parent' => 18 // ID of the parent page
+					,'post_excerpt' => $partner['partner_photo']
+	     	);
+				wp_update_post($page_exists);
+        // Page already exists
+
+			}
+		}
+
+		$associates = get_field('associates');
+		foreach($associates as $associate) {
+			$page = array(
+         'post_title' => $associate['attorney_name'],
+         'post_content' => "<div class = 'attorneypagetext'>".
+					"<div class = 'attorneyinfo'>".
+					$associate['email']. "\n". "tel ".
+					$associate['telephone_number']."\n". "fax ".
+					$associate['fax_number']."\n".
+					$associate['college']."\n".
+					$associate['law_school'].
+					"</div>".
+					"<div class = 'attorneybio'>".
+					$associate['attorney_bio'].
+					"</div>".
+					"</div>" ,
+				 'post_status' => 'publish',
+         'post_author' => 1,
+         'post_type' => 'page',
+         'post_parent' => 18 // ID of the parent page
+     	);
+
+		 	$page_exists = get_page_by_title( $page['post_title'] );
+
+    	if( $page_exists == null ) {
+        	// Page doesn't exist, so lets add it
+        	$insert = wp_insert_post( $page );
+        	if( $insert ) {
+            // Page was inserted ($insert = new page's ID)
+        	}
+	    } else {
+				$page_exists = array(
+					 'ID' => $page_exists-> ID,
+	         'post_title' => $associate['attorney_name'],
+	         'post_content' => "<div class = 'attorneypagetext'>".
+						"<div class = 'attorneyinfo'>".
+						$associate['email']. "\n". "tel ".
+						$associate['telephone_number']."\n". "fax ".
+						$associate['fax_number']."\n".
+						$associate['college']."\n".
+						$associate['law_school'].
+						"</div>".
+						"<div class = 'attorneybio'>".
+						$associate['attorney_bio'].
+						"</div>".
+						"</div>" ,
+	         'post_status' => 'publish',
+	         'post_author' => 1,
+	         'post_type' => 'page',
+	         'post_parent' => 18 // ID of the parent page
+	     	);
+				wp_update_post($page_exists);
+        // Page already exists
+				}
+			}
+
+		$of_counsel = get_field('of_counsel');
+		foreach($of_counsel as $counsel) {
+			$page = array(
+         'post_title' => $counsel['attorney_name'],
+         'post_content' => "<div class = 'attorneypagetext'>".
+					"<div class = 'attorneyinfo'>".
+					$counsel['email']. "\n". "tel ".
+					$counsel['telephone_number']."\n". "fax ".
+					$counsel['fax_number']."\n".
+					$counsel['college']."\n".
+					$counsel['law_school'].
+					"</div>".
+					"<div class = 'attorneybio'>".
+					$counsel['attorney_bio'].
+					"</div>".
+					"</div>",
+         'post_status' => 'publish',
+         'post_author' => 1,
+         'post_type' => 'page',
+         'post_parent' => 18 // ID of the parent page
+     	);
+
+
+		 	$page_exists = get_page_by_title( $page['post_title'] );
+
+    	if( $page_exists == null ) {
+        	// Page doesn't exist, so lets add it
+        	$insert = wp_insert_post( $page );
+        	if( $insert ) {
+            // Page was inserted ($insert = new page's ID)
+        	}
+	    } else {
+				$page_exists = array(
+					 'ID' => $page_exists-> ID,
+	         'post_title' => $counsel['attorney_name'],
+	         'post_content' => "<div class = 'attorneyinfo'>".
+					$counsel['email']. "\n".
+					$counsel['telephone_number']."\n".
+					$counsel['fax_number']."\n".
+					$counsel['college']."\n".
+					$counsel['law_school'].
+					"</div>".
+					"<div class = 'attorneybio'>".
+					$counsel['attorney_bio'].
+					"</div>".
+					"</div>",
+	         'post_status' => 'publish',
+	         'post_author' => 1,
+	         'post_type' => 'page',
+	         'post_parent' => 18 // ID of the parent page
+	     	);
+				wp_update_post($page_exists);
+        // Page already exists
+				}
+			}
+}
+
+    // do something
+
+
+
+add_action('acf/save_post', 'my_acf_save_post', 20);
+
+
 /**
  * Implement the Custom Header feature.
  */

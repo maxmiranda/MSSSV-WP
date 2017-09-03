@@ -14,10 +14,15 @@
 
 get_header(); ?>
 
-	<div id="primary" class="content-area">
+	<div id="between" class="content-area">
 		<main id="main" class="site-main">
+		<div id ="search">
+			<?php
+			 echo do_shortcode( '[searchandfilter "searchdiv" taxonomies="search" post_types="post"]' ); ?>
+			<h1 id = "newsh1"> News </h1>
 
-		<?php
+	 </div>
+		 <?php
 		if ( have_posts() ) :
 
 			if ( is_home() && ! is_front_page() ) : ?>
@@ -40,7 +45,6 @@ get_header(); ?>
 
 			endwhile;
 
-			the_posts_navigation();
 
 		else :
 
@@ -52,5 +56,4 @@ get_header(); ?>
 	</div><!-- #primary -->
 
 <?php
-get_sidebar();
 get_footer();

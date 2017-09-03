@@ -1,38 +1,23 @@
 <?php
 /**
- * The template for displaying all pages
  *
- * This is the template that displays all pages by default.
- * Please note that this is the WordPress construct of pages
- * and that other 'pages' on your WordPress site may use a
- * different template.
- *
- * @link https://codex.wordpress.org/Template_Hierarchy
- *
- * @package msssv
+ * @package WordPress
+ * @subpackage Twenty_Fourteen
+ * @since Twenty Fourteen 1.0
  */
+ get_header();
+ ?>
+<div id = "between">
+  <h1><?php echo get_the_title(get_the_ID()) ?></h1>
+  <?php if(has_excerpt(get_the_ID())): ?>
+  <img class= 'partnerimg' src = '/wp-content/themes/msssv/img/OriginalPhotos/<?php echo get_the_title(get_the_ID()) ?>.jpg'/>
+  <?endif ?>
+      <?php $content_post = get_post(get_the_ID());
+      $content = $content_post->post_content;
+      $content = apply_filters('the_content', $content); // this is almost certainly why new paragraphs are being formed for each and every one of the line breaks
+      echo $content; ?>
 
-get_header(); ?>
-
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main">
-
-			<?php
-			while ( have_posts() ) : the_post();
-
-				get_template_part( 'template-parts/content', 'page' );
-
-				// If comments are open or we have at least one comment, load up the comment template.
-				if ( comments_open() || get_comments_number() ) :
-					comments_template();
-				endif;
-
-			endwhile; // End of the loop.
-			?>
-
-		</main><!-- #main -->
-	</div><!-- #primary -->
-
-<?php
-get_sidebar();
-get_footer();
+</div>
+ <?php
+ get_footer();
+?>
